@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Renderizado Condicional - Vue.js</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body>
+    <div id="app">
+        <h1>{{ titulo }}</h1>
+        <button @click="toggleLogin">{{ estaLogueado ? 'Cerrar sesión' : 'Iniciar sesión' }}</button>
+        
+        <div v-if="estaLogueado">
+            <h2>Bienvenido, usuario</h2>
+            <p>Este contenido solo es visible para usuarios logueados.
+                <br>
+                Lorem ipsum dolor sit amet consectetur
+                adipisicing elit. Pariatur neque perspiciatis
+                quia hic libero earum recusandae quod reprehenderit?
+                Magni deleniti quod minus quis natus perferendis perspiciatis
+                qui ea temporibus laboriosam?
+
+            </p>
+        </div>
+        <div v-else>
+            <h2>Por favor, inicia sesión</h2>
+            <p>Debes iniciar sesión para ver el contenido exclusivo.</p>
+        </div>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>

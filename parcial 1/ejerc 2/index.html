@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Parcial 1</title>
+    <!-- Incluir Vue.js desde CDN -->
+    <script src="https://unpkg.com/vue@3"></script>
+    <!-- Incluir archivo app.js -->
+    <script defer src="app.js"></script>
+</head>
+<body>
+    <div id="app">
+        <h1>{{ titulo }}</h1>
+        <p>Cuenta: {{ cuenta }}</p>
+        <button @click="aumentar">aumentar</button>
+        <button @click="restar">restar</button>
+    </div>
+</body>
+</html>

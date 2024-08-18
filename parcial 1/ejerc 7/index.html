@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Toggle de Tema Oscuro</title>
+  <style>
+    /* Definimos los estilos básicos para cuando el tema es claro */
+    body.light {
+      background-color: white;  /* Fondo blanco para que sea más fácil de leer en la luz */
+      color: black;  /* Texto negro para buen contraste con el fondo claro */
+    }
+
+    /* Definimos los estilos para cuando el tema es oscuro */
+    body.dark {
+      background-color: black;  /* Fondo negro para reducir la fatiga visual en la oscuridad */
+      color: white;  /* Texto blanco para que sea legible sobre el fondo oscuro */
+    }
+
+    /* Estilos del botón que alterna los temas */
+    button {
+      padding: 10px 20px;  /* Un poco de espacio alrededor del texto para que el botón sea cómodo de presionar */
+      margin-top: 20px;  /* Un poco de espacio extra arriba del botón para que no esté pegado a otros elementos */
+      cursor: pointer;  /* Cambiamos el cursor a una mano cuando pasas sobre el botón para indicar que es clicable */
+      background-color: #ff00bf;  /* Azul brillante para que el botón destaque */
+      color: white;  /* Texto blanco que contrasta bien con el fondo azul */
+      border: none;  /* Sin bordes adicionales para un diseño limpio */
+      border-radius: 5px;  /* Bordes redondeados para un aspecto más moderno */
+    }
+
+    button:hover {
+      background-color: #ff00bf;  /* Cambia el color del botón cuando pasas el cursor por encima, para dar una retroalimentación visual */
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <!-- Este es el contenedor donde Vue va a inyectar el componente. Todo el contenido dinámico de la app estará aquí. -->
+  </div>
+
+  <!-- Incluimos Vue.js desde un CDN para poder usar sus funcionalidades -->
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  
+  <!-- Aquí empieza nuestra lógica en Vue -->
+  <script>
+    // Desestructuramos funciones de Vue para usarlas más fácilmente
+    const { createApp, ref, watchEffect } = Vue;
+
+    // Definimos el componente principal de nuestra aplicación
+    const App = {
+      setup() {
+        // Creamos una variable reactiva para saber si el tema oscuro está activado o no
+        const isDarkMode = ref(false);  // false significa que empezamos con el tema claro
+
+        // Función que cambia entre modo oscuro y claro cuando el usuario hace clic en el botón
+        const toggleTheme = () => {
+          // Cambiamos el valor de isDarkMode al contrario de lo que es ahora (si es false, lo hacemos true y viceversa)
+          isDarkMode.value = !isDarkMode.value;
+          // Aplicamos la clase correspondiente al body según el tema que esté activo
+          document.body.className = isDarkMode.value ? 'dark' : 'light';
+        };
+
+        // Aquí usamos watchEffect para asegurarnos de que el tema correcto se aplique al cuerpo de la página
+        watchEffect(() => {
+          document.body.className = isDarkMode.value ? 'dark' : 'light';
+        });
+
+        // Retornamos las variables y funciones que queremos usar en nuestro template
+        return {
+          isDarkMode,
+          toggleTheme,
+        };
+      },
+      // Definimos el HTML que se va a renderizar en la página
+      template: `
+      <center>
+        <div>
+          <!-- Botón que el usuario presiona para alternar entre los temas -->
+          
+          <button @click="toggleTheme">
+            Cambiar a {{ isDarkMode ? 'Tema Claro' : 'Tema Oscuro' }}
+          </button>
+        </div>
+        </center>
+      `,
+    };
+
+    // Creamos la aplicación Vue y la montamos en el contenedor con id="app"
+    createApp(App).mount('#app');
+  </script>
+</body>
+</html>
